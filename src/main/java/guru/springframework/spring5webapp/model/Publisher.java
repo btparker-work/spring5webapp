@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by jt on 5/17/17.
@@ -16,6 +21,18 @@ public class Publisher {
     private Long id;
     private String name;
     private String address;
+
+    @OneToMany
+    @JoinColumn(name = "publisher_id")
+    private Set<Book> books = new HashSet<>();
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public Long getId() {
         return id;
